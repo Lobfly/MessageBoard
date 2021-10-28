@@ -213,6 +213,7 @@ export default {
     width: 70px;
     height: 18px;
     animation: loading ease-in-out  1.6s infinite;
+    border-radius: 12px;
 
 }
 .skeleton_text{
@@ -223,6 +224,8 @@ export default {
     width: 400px;
     background-color: grey;
     animation: loading ease-in-out  1.6s infinite;
+    border-radius: 20px;
+
 }
 @keyframes loading {
     0% {
