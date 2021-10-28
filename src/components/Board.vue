@@ -2,10 +2,10 @@
   <div id="board">
       <div id="header">
           <div class="title">Message Board</div>
-          <div class="option" ref="option">
+          <div class="option" ref="option" @click="optionClick">
           </div>
       </div>
-      <div id="messages" class="content">
+      <div id="messages" class="content content_loading" ref="content">
           <div class="scrollBox">
             <div class="item" v-for="(item,index) in messages" :key="index">
                 <div class="avater"></div>
@@ -21,10 +21,45 @@
             </div>
           </div>
       </div>
-      <!-- <div class="option_container">
-      <div class="option_box" ref="optionBox">
+      <div class="skeleton" ref="skeleton">
+          <div class="skeleton_container">
+          <div class="skeleton_item">
+              <div class="skeleton_avater"></div>
+              <div class="skeleton_name"></div>
+              <div class="skeleton_text"></div>
+          </div>
+          <div class="skeleton_item">
+              <div class="skeleton_avater"></div>
+              <div class="skeleton_name"></div>
+              <div class="skeleton_text"></div>
+          </div>
+          <div class="skeleton_item">
+              <div class="skeleton_avater"></div>
+              <div class="skeleton_name"></div>
+              <div class="skeleton_text"></div>  
+          </div>
+          <div class="skeleton_item">
+              <div class="skeleton_avater"></div>
+              <div class="skeleton_name"></div>
+              <div class="skeleton_text"></div>
+          </div>
+          <div class="skeleton_item">
+              <div class="skeleton_avater"></div>
+              <div class="skeleton_name"></div>
+              <div class="skeleton_text"></div>
+          </div>
+          </div>
+
       </div>
-      </div> -->
+      <div class="option_container">
+          <div :class="optionBoxClass">
+              <div class="user_name">Lobfly</div>
+              <!-- <ul class="avater_list">
+                  <li v-for="(item,index) in avaters" :key="index">
+                  </li>
+              </ul> -->
+      </div>
+      </div>
 
       <div id="post">
           <textarea></textarea>
@@ -40,7 +75,12 @@ export default {
     name:'Board',
     data(){
         return{
-            messages:[]
+            messages:[],
+            optionBoxClass: {
+                'option_box':true,
+                'option_box_active':false
+            },
+            avaters:['1.jpg']
         }
     },
     methods:{
@@ -63,12 +103,19 @@ export default {
             console.log(bs)
         },
         optionClick(){
-
+            this.optionClickTimes++
+            this.optionBoxClass.option_box_active = true
+            
+        },
+        loaded(){
+            this.$refs.skeleton.classList.add('skeleton_loaded')
+            this.$refs.content.classList.remove('content_loading')
         }
     },
     mounted(){
         this.getData()
         .then(this.scroll)
+        .then(this.loaded)
     }
 }
 </script>
@@ -104,30 +151,89 @@ export default {
     background-size: cover;
 }
 .option_container{
-    height: 100px;
-    border: 1px solid red;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 362px;
+    overflow: hidden;
 }
 .option_box{
+    background-color: rgb(222, 224, 224);
+    height: 200px;
     width: 100%;
-    background-color: grey;
-    height: 180px;
     position: absolute;
-    top: 562px;
+    top: 200px;
     transition: 0.3s ease-in-out;
+    z-index: 11;
+    border-radius: 12px 12px 0 0;
 }
 .option_box_active{
-    width: 100%;
-    background-color: grey;
-    height: 180px;
-    position: absolute;
-    transition: 0.3s ease-in-out;  
-    top: 400px;
+    top: 0px;
 }
 .title{
     position: absolute;
     left: 30px;
     top: 30%;
     font-size: 30px;
+}
+.skeleton{
+    position: absolute;
+    width: 100%;
+    height: 460px;
+    background-color: #fff;
+    top: 100px;
+}
+.skeleton_container{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.skeleton_item{
+    height: 20%;
+    width: 100%;
+    border-bottom: 1px solid rgb(168, 164, 164);
+    position: relative;
+}
+.skeleton_avater{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: grey;
+    position: relative;
+    top: 10px;
+    left: 4px;
+    background-size: cover;
+    animation: loading ease-in-out  1.6s infinite;
+}
+.skeleton_name{
+    position: absolute;
+    left: 56px;
+    top: 20px;
+    background-color: grey;
+    width: 70px;
+    height: 18px;
+    animation: loading ease-in-out  1.6s infinite;
+
+}
+.skeleton_text{
+    position: absolute;
+    left: 54px;
+    top: 46px;
+    height: 40px;
+    width: 400px;
+    background-color: grey;
+    animation: loading ease-in-out  1.6s infinite;
+}
+@keyframes loading {
+    0% {
+        background-color: grey;
+    }
+    50% {
+        background-color: rgb(168, 164, 164);
+    }
+    100% {
+        background-color: grey;
+    }
 }
 .content{
     width: 100%;
@@ -136,6 +242,14 @@ export default {
     overflow: hidden;
     position: relative;
     background-color: #fff;
+    z-index: 10;
+}
+.content_loading{
+    /* display: none; */
+    opacity: 0;
+}
+.skeleton_loaded{
+    display: none;
 }
 .item{
     background-color: var(--item_color);
@@ -226,7 +340,7 @@ export default {
     border-radius: 50%;
     margin: 0;
     padding: 0;
-    background-color: rgb(227, 236, 250);
+    background-color: var(--button_color);
     font-size: 26px;
     color: #88a9fc;
     cursor: pointer;
@@ -240,7 +354,7 @@ export default {
     opacity: 0.8;
 }
 #post button:hover{
-    background-color: rgb(193, 213, 247);
+    background-color: #ffd3b6;
 }
 /* @media screen and (min-width: 1200px){
     .content{
