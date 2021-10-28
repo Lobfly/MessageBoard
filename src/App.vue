@@ -21,11 +21,12 @@ export default {
     --hover_color:#dcedc1;
     --button_color:#eeeeee;
 }
+
 #app{
   font-family: Helvetica;
   display: flex;
   justify-content: center;
   background-color: var(--body_color);
-  height: 860px;
+  height: 100vh;
 }
 </style>

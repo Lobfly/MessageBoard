@@ -124,7 +124,7 @@ export default {
 
 #board{
     margin-top: 10px;
-    width: 500px;
+    width: 380px;
     border-radius: 10px;
     position: relative;
     /* border: 2px solid var(--line_color); */
@@ -144,7 +144,7 @@ export default {
     background-color: rgb(236, 114, 14);
     border-radius: 50%;
     position: absolute;
-    left: 88%;
+    left: 80%;
     top: 22px;
     cursor: pointer;
     background-image: url('../assets/Avatar/1.jpg');
@@ -276,7 +276,7 @@ export default {
 }
 .star{
     top: 10px;
-    left: 94%;
+    left: 92%;
     position: absolute;
     cursor: pointer;
 }
@@ -333,7 +333,7 @@ export default {
     outline: none;
     border: 1px solid #a5bcf5;
     height: 60px;
-    width: 460px;
+    width: 92%;
     font-size: 22px;
 }
 #post button{
@@ -359,12 +359,16 @@ export default {
 #post button:hover{
     background-color: #ffd3b6;
 }
-/* @media screen and (min-width: 1200px){
-    .content{
-        width: 448px;
-    }
+@media screen and (min-width: 1200px){
     #board{
-        width: 580px;
+        width: 500px;
     }
-} */
+    .option{
+
+        left: 88%;
+    }
+    .star{
+        left: 94%;
+    }
+}
 </style>
