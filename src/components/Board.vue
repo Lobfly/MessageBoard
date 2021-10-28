@@ -315,7 +315,7 @@ export default {
     table-layout:fixed; 
     word-break:break-all; 
     overflow:hidden; 
-    
+    text-align: justify;
     opacity: 0.7;
 }
 #post{
