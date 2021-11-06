@@ -23,27 +23,7 @@
       </div>
       <div class="skeleton" ref="skeleton">
           <div class="skeleton_container">
-          <div class="skeleton_item">
-              <div class="skeleton_avater"></div>
-              <div class="skeleton_name"></div>
-              <div class="skeleton_text"></div>
-          </div>
-          <div class="skeleton_item">
-              <div class="skeleton_avater"></div>
-              <div class="skeleton_name"></div>
-              <div class="skeleton_text"></div>
-          </div>
-          <div class="skeleton_item">
-              <div class="skeleton_avater"></div>
-              <div class="skeleton_name"></div>
-              <div class="skeleton_text"></div>  
-          </div>
-          <div class="skeleton_item">
-              <div class="skeleton_avater"></div>
-              <div class="skeleton_name"></div>
-              <div class="skeleton_text"></div>
-          </div>
-          <div class="skeleton_item">
+          <div class="skeleton_item" v-for="i in 5" :key="i">
               <div class="skeleton_avater"></div>
               <div class="skeleton_name"></div>
               <div class="skeleton_text"></div>
@@ -53,17 +33,15 @@
       </div>
       <div class="option_container">
           <div :class="optionBoxClass">
-              <div class="user_name">Lobfly</div>
-              <!-- <ul class="avater_list">
-                  <li v-for="(item,index) in avaters" :key="index">
-                  </li>
-              </ul> -->
       </div>
       </div>
 
       <div id="post">
           <textarea></textarea>
           <button><img src="../assets/发送.svg" width="30" height="30"></button>
+      </div>
+      <div id="login" @click="login">
+          登录
       </div>
   </div>
 </template>
@@ -80,10 +58,15 @@ export default {
                 'option_box':true,
                 'option_box_active':false
             },
-            avaters:['1.jpg']
+            avaters:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg']
         }
     },
     methods:{
+        login:async function(){
+            const { user, session, error } = await supabase.auth.signIn({
+                provider: 'github'
+            });
+        },
         getData:async function(){
             const data = await supabase.from('message').select()
             this.messages = data.data
@@ -147,7 +130,7 @@ export default {
     left: 80%;
     top: 22px;
     cursor: pointer;
-    background-image: url('../assets/Avatar/1.jpg');
+    background-image: url('../assets/Avater/1.jpg');
     background-size: cover;
 }
 .option_container{
@@ -156,6 +139,8 @@ export default {
     position: absolute;
     top: 362px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 .option_box{
     background-color: rgb(222, 224, 224);
@@ -274,6 +259,7 @@ export default {
     left: 6px;
     background-size: cover;
 }
+
 .star{
     top: 10px;
     left: 92%;
