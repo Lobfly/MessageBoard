@@ -198,7 +198,6 @@ export default {
 	position: relative;
 	top: 10px;
 	left: 6px;
-	background-size: cover;
 }
 .avatar img {
   height: 40px;
