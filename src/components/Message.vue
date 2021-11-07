@@ -201,8 +201,8 @@ export default {
 	background-size: cover;
 }
 .avatar img {
-  height: 100%;
-  width: 100%;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
 }
 @media screen and (min-width: 1200px) {
