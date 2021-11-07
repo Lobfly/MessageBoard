@@ -18,7 +18,7 @@ export default {
     --body_color:#dfe2eb;
     --item_color:rgb(253, 253, 253);
     --text_color:#4A4A4A;
-    --hover_color:#dcedc1;
+    --button_active_color:#dcedc1;
     --button_color:#eeeeee;
 }
 
@@ -28,5 +28,16 @@ export default {
   justify-content: center;
   background-color: var(--body_color);
   height: 100vh;
+}
+@keyframes loading {
+	0% {
+		background-color: grey;
+	}
+	50% {
+		background-color: rgb(168, 164, 164);
+	}
+	100% {
+		background-color: grey;
+	}
 }
 </style>
